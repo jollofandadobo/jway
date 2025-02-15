@@ -1,2 +1,31 @@
 # Virtual Env
 .venv
+
+# Compiled files and caches
+*.out
+*.swp
+.DS_Store
+.vscode/
+.idea/
+.mypy_cache/
+pytest_cache/
+*.pid
+
+# Byte-compiled / cached
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environment
+venv/
+.env
+*.venv
+env/
+*.envrc
+
+# API Keys and Environment Variables
+.env
+config.json
+secrets.json
