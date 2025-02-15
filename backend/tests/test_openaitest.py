@@ -1,6 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List
+from ..services.openai_service import summarize_reviews as summarize_reviews_service
 
 app = FastAPI()
 
@@ -12,6 +13,8 @@ def summarize_reviews(request: ReviewRequest):
     if not request.reviews:
         return {"summary": "No reviews provided."}
     
-    # Simple example: concatenate first two reviews as a fake summary
-    summary = " ".join(request.reviews[:2])  
-    return {"summary": summary}
+    try:
+        summary = summarize_reviews_service(request.reviews)
+        return {"summary": summary}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
