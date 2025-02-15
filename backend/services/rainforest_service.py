@@ -17,13 +17,10 @@ def fetch_rainforest_data(asin: str):
     try:
         response = requests.get(RAIN_FOREST_API_URL, params=params, timeout=10)
         response.raise_for_status()
-
-
+        
         data = response.json()
-        print(f"[DEBUG] Rainforest API Response: {data}")  # Debug log
 
         return data
     except requests.exceptions.RequestException as e:
-        print(f"[ERROR] Rainforest API Error: {str(e)}")  # Debug log
         return {"error": f"Failed to fetch data: {str(e)}"}
 
