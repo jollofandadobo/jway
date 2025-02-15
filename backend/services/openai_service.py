@@ -1,6 +1,3 @@
-"""
-Handles OpenAI API request
-"""
 import os
 import openai
 import logging
@@ -19,14 +16,19 @@ def summarize_reviews(reviews: list) -> str:
     :return: AI-generated summary
     """
     try:
-        prompt = f"Summarize these product reviews:\n{reviews}"
+        prompt = f"Summarize these product reviews and state if the overall sentiment is positive or negative:\n{reviews}"
+        logger.info(f"Prompt: {prompt}")
         response = openai.ChatCompletion.create(
             model="gpt-4",
-            messages=[{"role": "system", "content": "You are an AI that summarizes product reviews."},
-                      {"role": "user", "content": prompt}]
+            messages=[
+                {"role": "system", "content": "You are an AI that summarizes product reviews."},
+                {"role": "user", "content": prompt}
+            ]
         )
-        return response["choices"][0]["message"]["content"].strip()
+        logger.info(f"Response: {response}")
+        summary = response.choices[0].message["content"].strip().replace('\n', ' ')
+        sentiment = "positive" if "positive" in summary.lower() else "negative"
+        return f"Reviews state a generally '{sentiment}' response, with the summary statement being: '{summary}'"
     except Exception as e:
         logger.error(f"Error summarizing reviews: {e}")
         return "Error generating summary."
-
