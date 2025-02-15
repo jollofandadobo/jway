@@ -1,0 +1,21 @@
+{
+    "manifest_version": 3,
+    "name": "Amazon ASIN Extractor",
+    "version": "1.0",
+    "description": "Extracts the ASIN from Amazon product URLs and sends it to an API.",
+    "permissions": ["activeTab", "scripting"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "action": {
+      "default_popup": "assistant.html"
+    },
+    "content_scripts": [
+
+        {
+        "matches": ["*://*.amazon.ca/*"] ,
+        "js": ["content.js"]
+        }
+    ]
+}
+  
