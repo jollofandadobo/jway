@@ -1,4 +1,42 @@
+:root {
+    --black: #111517;
+    --white: #F6F5F4;
+    --navy: #233D4D;
+    --yellow: #FCCA46;
+    --yellow-dark: #603920;
+    --orange: #FE7F2D;
+    --green: #A1C181;
+    --green-dark: #244239;
+}
+
 * {
 	margin: 0;
 	box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--white);
+    color: var(--black);
+
+    max-width: 50em;
+    max-height: 62em;
+}
+
+button:focus, button {
+	border: none;
+	cursor: pointer;
+	outline: none;
+}
+
+.title {
+    color: var(--navy);
+    font-size: 2rem;
+    font-weight: 900;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+}
+
+.product-image {
+    display: none;
 }
