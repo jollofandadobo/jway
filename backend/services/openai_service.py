@@ -1,0 +1,3 @@
+"""
+Handles OpenAI API request
+"""
