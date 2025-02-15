@@ -1,22 +1,20 @@
-from typing import Union
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
+from api.rainforest import router as rainforest_router
+from api.health import router as health_router
+import logging
 
-from fastapi import FastAPI
+app = FastAPI(title="Sway Review API")
 
-app = FastAPI()
+# Routers
+app.include_router(rainforest_router, prefix="/api/rainforest", tags=["Rainforest"])
+app.include_router(health_router, prefix="/api/health", tags=["Health Check"])
 
-"""
-Template code for now this will be the main entry point for FAST API
-
-Include routers for API endpoints
-"""
-
-
-@app.get("/")
-async def read_root():
-    return {"Hello": "World"}
-
-
-@app.get("/items/{item_id}")
-async def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
-
+# Exception handler
+@app.exception_handler(Exception)
+async def unicorn_exception_handler(request: Request, exc: Exception):
+    logging.error(f"Unhandled error: {exc}")
+    return JSONResponse(
+        status_code=500,
+        content={"message": "Internal Server Error"},
+    )

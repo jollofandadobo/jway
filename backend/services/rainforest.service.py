@@ -1,3 +1,0 @@
-"""
-Calls Rainforest API
-"""
