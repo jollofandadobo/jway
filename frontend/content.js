@@ -6,5 +6,7 @@ function extractASIN() {
 let asin = extractASIN();
 if (asin) {
     // Send the ASIN to the background script
-    chrome.runtime.sendMessage({ asin: asin });
+    // console.log({ asin: asin }) ;
+    console.log(asin) ;
+    chrome.runtime.sendMessage({ message: "fetchAsinData", asin: asin });
 }
