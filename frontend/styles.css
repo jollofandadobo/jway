@@ -7,6 +7,7 @@
     --orange: #FE7F2D;
     --green: #A1C181;
     --green-dark: #244239;
+    --gray: #D9D9D9;
 }
 
 * {
@@ -21,6 +22,9 @@ body {
 
     max-width: 50em;
     max-height: 62em;
+
+    border: 3px solid var(--orange);
+
 }
 
 button:focus, button {
@@ -29,14 +33,152 @@ button:focus, button {
 	outline: none;
 }
 
-.title {
+button {
+    font-size: 1.25rem;
+    font-weight: 600;
+    
+    padding: 1em 4em; 
+}
+
+h1 {
     color: var(--navy);
-    font-size: 2rem;
-    font-weight: 900;
     font-family: 'Lato', sans-serif;
+    font-weight: 500;
     text-align: center;
 }
 
-.product-image {
+h2 {
+    color: var(--black);
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+
+    font-size: 1.05em;
+}
+
+p {
+    color: var(--black);
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+
+    font-size: 1em;
+}
+
+.container, .landing-page, .product-page {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    padding: 1.5em;
+
+}
+
+.exit {
+    position: absolute;
+    right: 1.5em;
+    top: 1.5em;
+
+    cursor: pointer;
+}
+
+.exit-bttn {
+    width: 1em;
+}
+
+/* LANDING PAGE CSS */
+
+.landing-page {
     display: none;
+}
+
+.landing--title {
+    margin-top: 15%;
+
+    font-size: 2rem;
+}
+
+.landing--button {
+    background-color: var(--yellow);
+    color: var(--yellow-dark); 
+    /* dynamic button text and color changes depending on whether or not they have are already on an amazon page or not  */
+
+    margin-top: 15%;
+    margin-bottom: 20%;
+}
+
+/* PRODUCT PAGE CSS */
+
+/* .product-page {
+    display: none;
+} */
+
+.product--image {
+     max-width: 10em;
+     margin-top: 5%;
+}
+.product--title {
+    font-size: 1.5rem;
+
+    margin-top: 2.5%;
+}
+
+.insights {
+    width: 100%;
+    margin-top: 2.5%;
+    border-top: 1px solid var(--gray);
+}
+
+.summary {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 100%;
+
+    /* padding: ; */
+}
+
+.summary--heading {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-top: 2.5%;
+    gap: 1%;
+
+    /* border: 2px solid red; */
+}
+
+.summary--heading h2 {
+   margin-bottom: 1%;
+}
+
+.search-icon {
+    width: 1em
+}
+
+.product--button {
+    background-color: var(--green);
+    color: var(--green-dark); 
+    /* dynamic button text and color changes depending on whether or not they have are already on an amazon page or not  */
+
+    margin-top: 5%;
+}
+
+
+/* FOOTER SECTION CSS */
+
+.footer {
+    display: flex;
+    justify-content: end;
+    border-top: 1px solid var(--gray);
+    padding: 1.5em;
+}
+
+.footer-logo {
+    width: 8em;
 }
