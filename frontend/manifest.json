@@ -24,7 +24,8 @@
 
         {
         "matches": ["*://*.amazon.ca/*"] ,
-        "js": ["content.js"]
+        "js": ["content.js"],
+        "type": "module"
         }
     ], 
     "host_permissions": [

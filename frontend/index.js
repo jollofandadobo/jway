@@ -1,3 +1,5 @@
+import { extractASIN } from './content.js';
+
 const landingPage = document.querySelector('.landing-page');
 const productPage = document.querySelector('.product-page');
 
@@ -47,21 +49,39 @@ if (productFromLocalStorage) {
 chrome.tabs.query({active: true, currentWindow: true}, function(tabs) { 
     const currentURL = tabs[0].url;
     updateButton(currentURL);
+    const asin = extractASIN();
     landingButton.addEventListener('click', async function () {
         if (isAmazonPage(currentURL)) {
-            // TODO: fetch product info and return dictionary
-            // with title, image, and ai summary
-            /* const myProduct = {
-                title: "",
-                image: "",
-                summary: ""
-            }; */
-            
-            // localStorage.setItem("myProduct", JSON.stringify(myProduct));
-            goToProductPage(); // TODO: remove once fetch is implemented
-            // render(insights);  // TODO: uncomment once fetch is implemented
+            if (asin) {
+                try {
+                    const response = await fetch(`http://127.0.0.1:8000/api/rainforest/${encodeURIComponent(asin)}`);
+                    const data = await response.json();
+                    if (data) {
+                        localStorage.setItem("myProduct", JSON.stringify(data));
+                        render(data);
+                    }
+                } catch (error) {
+                    console.error("Error fetching product info:", error);
+                }
+            }
         } else {
             window.open('https://www.amazon.ca', '_blank');
+        }
+    });
+    productButton.addEventListener('click', async function () {
+        if (isAmazonPage(currentURL)) {
+            if (asin) {
+                try {
+                    const response = await fetch(`http://127.0.0.1:8000/api/rainforest/${encodeURIComponent(asin)}`);
+                    const data = await response.json();
+                    if (data) {
+                        localStorage.setItem("myProduct", JSON.stringify(data));
+                        render(data);
+                    }
+                } catch (error) {
+                    console.error("Error fetching product info:", error);
+                }
+            }
         }
     });
 });
