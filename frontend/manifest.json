@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "Amazon ASIN Extractor",
+    "name": "JWAY | AI-Powered Amazon Product Insights",
     "version": "1.0",
     "description": "Extracts the ASIN from Amazon product URLs and sends it to an API.",
     "permissions": ["activeTab", "scripting", "tabs"],

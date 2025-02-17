@@ -1,4 +1,4 @@
-export function extractASIN() {
+function extractASIN() {
     let match = document.URL.match(/\/dp\/([A-Z0-9]{10})|\/gp\/product\/([A-Z0-9]{10})/);
     return match ? (match[1] || match[2]) : null;
 }

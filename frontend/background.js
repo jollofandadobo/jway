@@ -18,7 +18,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             // Replace it with a message from back end
             chrome.runtime.sendMessage({
                 message: "asinDataReceived",
-                data: "Place holder sumaryyy for now"
+                data: data
             })
         })
         .catch(error => {
