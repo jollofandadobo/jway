@@ -1,7 +1,7 @@
 import os
 import openai
 import logging
-from ..core.config import Config
+from core.config import Config
 
 # Load API Key from environment variables
 openai.api_key = Config.OPENAI_API_KEY
