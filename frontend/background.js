@@ -1,23 +1,25 @@
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.message === "fetchAsinData") {
         console.log("Received ASIN from content script:", request.asin);
-        
-        fetch("http://127.0.0.1:8000/receive_asin", {
-            method: "POST",
+
+        const url = `http://127.0.0.1:8000/api/rainforest/${encodeURIComponent(request.asin)}`;
+
+        fetch(url, {
+            method: "GET",
             headers: {
                 "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ asin: request.asin })
+            }
         })
         .then(response => response.json())
         .then(data => {
             console.log("Response from server:", data);
+            sendResponse({ success: true, data }); // Send response back to content script
         })
         .catch(error => {
-            console.error("Error sending ASIN to server:", error);
+            console.error("Error fetching ASIN data:", error);
+            sendResponse({ success: false, error: error.message });
         });
 
-        sendResponse({ success: true });
+        return true; // Required for async sendResponse
     }
-    return true; // Required for async sendResponse
 });
