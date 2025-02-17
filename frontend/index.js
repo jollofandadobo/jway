@@ -71,18 +71,13 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     });
     productButton.addEventListener('click', async function () {
         if (isAmazonPage(currentURL)) {
-            if (asin) {
-                try {
-                    const response = await fetch(`http://127.0.0.1:8000/api/rainforest/${encodeURIComponent(asin)}`);
-                    const data = await response.json();
-                    if (data) {
-                        localStorage.setItem("myProduct", JSON.stringify(data));
-                        render(data);
-                    }
-                } catch (error) {
-                    console.error("Error fetching product info:", error);
+            chrome.runtime.onMessage.addListener((request) => {
+                if (request.message === "asinDataReceived") {  
+                    console.error(request.data)                 
+                    localStorage.setItem("myProduct", JSON.stringify(request.data));
+                    render(request.data); // Required for async sendResponse
                 }
-            }
+            });
         }
     });
 });
